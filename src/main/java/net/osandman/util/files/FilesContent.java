@@ -4,8 +4,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-/*
-Проход по дереву файлов
+/**
+Проход по дереву файлов, запись содержимого найденных файлов в один файл
 */
 
 public class FilesContent {
@@ -16,13 +16,16 @@ public class FilesContent {
         Path destinationFile = Path.of(resultFileAbsolutePath.getParent().toString(), "/allFilesContent.txt");
         try {
             Files.deleteIfExists(destinationFile);
-            writeFilesContent(walkDirTree(rootPath), destinationFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        writeFilesContent(walkDirTree(rootPath), destinationFile);
     }
 
-    static void writeFilesContent(Set<Path> files, Path resultFile) throws IOException {
+    /**
+     * записывает содержимое файлов {@code files} в файл {@code resultFile}
+     */
+    static void writeFilesContent(Set<Path> files, Path resultFile) {
         for (Path file : files) {
             try (FileInputStream fileInputStream = new FileInputStream(file.toFile());
                  FileOutputStream fileOutputStream = new FileOutputStream(resultFile.toFile(), true)) {
@@ -30,14 +33,19 @@ public class FilesContent {
                     fileOutputStream.write(fileInputStream.read());
                 }
                 fileOutputStream.write(System.lineSeparator().getBytes());
+                System.out.printf("%s: %s | %d bytes\n", "writing from file", file.toAbsolutePath(), Files.size(file));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.printf("%s: %s | %d bytes\n", "writing from file", file.toAbsolutePath(), Files.size(file));
         }
         System.out.println("all files: " + files.size());
     }
 
+    /**
+     * обход дерева каталогов начиная с {@code startDir} <p>
+     * возвращает TreeSet найденых файлов в соответствие с параметрами заданными в {@code GetSetOfFiles}<p>
+     * который наследуется от SimpleFileVisitor и переопределяет его методы
+     */
     static Set<Path> walkDirTree(Path startDir) {
         Set<Path> resultFiles = new TreeSet<>();
         EnumSet<FileVisitOption> options = EnumSet.of(FileVisitOption.FOLLOW_LINKS);

@@ -17,11 +17,11 @@ public class GetSetOfFiles extends SimpleFileVisitor<Path> {
 
     /**
      * переопределяем метод {@code visitFile}<p>
-     * заполняет Set значениями File, файлов, имеющих размер менее 50 байт
+     * при выполнении заполняет Set значениями Path файлов, имеющих размер менее 50 байт
      */
     @Override
     public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
-        if (!Files.isDirectory(path) && Files.size(path) <= 50 && Files.size(path) != 0) {
+        if (Files.size(path) <= 50 && Files.size(path) != 0) {
             result.add(path);
         }
         return super.visitFile(path, basicFileAttributes);
