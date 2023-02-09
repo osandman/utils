@@ -6,13 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Set;
+import java.util.List;
 
 public class GetSetOfFiles extends SimpleFileVisitor<Path> {
-    private Set<Path> result;
+    private String partOfName;
+    private String partOfContent;
+    private long minSize;
+    private long maxSize = Long.MAX_VALUE;
+    private final List<Path> foundFiles;
 
-    public GetSetOfFiles(Set<Path> result) {
-        this.result = result;
+    public GetSetOfFiles(List<Path> foundFiles) {
+        this.foundFiles = foundFiles;
     }
 
     /**
@@ -20,10 +24,33 @@ public class GetSetOfFiles extends SimpleFileVisitor<Path> {
      * при выполнении заполняет Set значениями Path файлов, имеющих размер менее 50 байт
      */
     @Override
-    public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
-        if (Files.size(path) <= 50 && Files.size(path) != 0) {
-            result.add(path);
+    public FileVisitResult visitFile(Path file, BasicFileAttributes basicFileAttributes) throws IOException {
+        if (partOfName != null && file.getFileName().toString().contains(partOfName)) {
+            long fileSize = Files.size(file);
+            if (fileSize >= minSize && fileSize <= maxSize) {
+                String fileContent = new String(Files.readAllBytes(file));
+                if (partOfContent != null && fileContent.contains(partOfContent)) {
+                    foundFiles.add(file);
+                }
+            }
         }
-        return super.visitFile(path, basicFileAttributes);
+        return super.visitFile(file, basicFileAttributes);
+    }
+
+    public void setPartOfName(String partOfName) {
+        this.partOfName = partOfName;
+    }
+
+
+    public void setPartOfContent(String partOfContent) {
+        this.partOfContent = partOfContent;
+    }
+
+    public void setMinSize(long minSize) {
+        this.minSize = minSize;
+    }
+
+    public void setMaxSize(long maxSize) {
+        this.maxSize = maxSize;
     }
 }

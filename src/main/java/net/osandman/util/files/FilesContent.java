@@ -5,8 +5,8 @@ import java.nio.file.*;
 import java.util.*;
 
 /**
-Проход по дереву файлов, запись содержимого найденных файлов в один файл
-*/
+ * Проход по дереву файлов, запись содержимого найденных файлов в один файл
+ */
 
 public class FilesContent {
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class FilesContent {
     /**
      * записывает содержимое файлов {@code files} в файл {@code resultFile}
      */
-    static void writeFilesContent(Set<Path> files, Path resultFile) {
+    static void writeFilesContent(List<Path> files, Path resultFile) {
         for (Path file : files) {
             try (FileInputStream fileInputStream = new FileInputStream(file.toFile());
                  FileOutputStream fileOutputStream = new FileOutputStream(resultFile.toFile(), true)) {
@@ -46,11 +46,17 @@ public class FilesContent {
      * возвращает TreeSet найденых файлов в соответствие с параметрами заданными в {@code GetSetOfFiles}<p>
      * который наследуется от SimpleFileVisitor и переопределяет его методы
      */
-    static Set<Path> walkDirTree(Path startDir) {
-        Set<Path> resultFiles = new TreeSet<>();
+    static List<Path> walkDirTree(Path startDir) {
+        List<Path> resultFiles = new ArrayList<>();
+        GetSetOfFiles fileVisitor = new GetSetOfFiles(resultFiles);
+        fileVisitor.setMinSize(7);
+        fileVisitor.setMaxSize(78);
+        fileVisitor.setPartOfContent("ir");
+        fileVisitor.setPartOfName("read");
+
         EnumSet<FileVisitOption> options = EnumSet.of(FileVisitOption.FOLLOW_LINKS);
         try {
-            Files.walkFileTree(startDir, options, Integer.MAX_VALUE, new GetSetOfFiles(resultFiles));
+            Files.walkFileTree(startDir, options, Integer.MAX_VALUE, fileVisitor);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
