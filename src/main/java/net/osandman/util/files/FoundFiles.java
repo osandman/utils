@@ -6,18 +6,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.List;
 
-public class GetSetOfFiles extends SimpleFileVisitor<Path> {
-    private String partOfName;
-    private String partOfContent;
-    private long minSize;
-    private long maxSize = Long.MAX_VALUE;
-    private final List<Path> foundFiles;
+/**
+ * нахождение файлов в соответствие с заданными параметрами
+ */
 
-    public GetSetOfFiles(List<Path> foundFiles) {
-        this.foundFiles = foundFiles;
-    }
+public class FoundFiles extends SimpleFileVisitor<Path> {
+    private String partOfName = "";
+    private String partOfContent = "";
+    private long minSize = 0;
+    private long maxSize = Long.MAX_VALUE;
+
+    private final List<Path> foundFiles = new ArrayList<>();
+
 
     /**
      * переопределяем метод {@code visitFile}<p>
@@ -52,5 +55,9 @@ public class GetSetOfFiles extends SimpleFileVisitor<Path> {
 
     public void setMaxSize(long maxSize) {
         this.maxSize = maxSize;
+    }
+
+    public List<Path> getFoundFiles() {
+        return foundFiles;
     }
 }
