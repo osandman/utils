@@ -1,4 +1,4 @@
-package net.osandman.util.files;
+package net.osandman.util.net;
 
 import java.io.IOException;
 import java.io.InputStream;
