@@ -49,7 +49,7 @@ public class FoundFiles extends SimpleFileVisitor<Path> {
 
     /**
      * переопределяем метод {@code visitFile}<p>
-     * при выполнении заполняет Set значениями Path файлов, имеющих размер менее 50 байт
+     * при выполнении заполняет List значениями Path файлов, имеющих размер менее 50 байт
      */
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes basicFileAttributes) throws IOException {
