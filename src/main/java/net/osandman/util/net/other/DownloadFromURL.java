@@ -1,4 +1,4 @@
-package net.osandman.util.net;
+package net.osandman.util.net.other;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,9 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class NetUtils {
+public class DownloadFromURL {
     public static void main(String[] args) throws IOException {
-        Path fileFromURL = downloadFileFromURL("https://ya.ru/index.html",
+        Path fileFromURL = downloadFileFromURL("https://schools.school.mosreg.ru/children/marks.aspx",
                 Paths.get("D:/MyDownloads"));
         System.out.println("writing to file: " + fileFromURL);
         for (String line : Files.readAllLines(fileFromURL)) {
