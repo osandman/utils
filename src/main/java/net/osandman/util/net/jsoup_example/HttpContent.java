@@ -1,4 +1,4 @@
-package net.osandman.util.net.jsoup_test;
+package net.osandman.util.net.jsoup_example;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

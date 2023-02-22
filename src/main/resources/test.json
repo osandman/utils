@@ -1,1 +1,17 @@
-{"param1":"hello","param2":5,"param4":38.8,"new name":{"innerParam1":"some value in inner class","innerParam2":["1","2","345"]}}
+[ {
+  "innerData" : {
+    "innerParam1" : "some value in inner class",
+    "innerParam2" : [ "1", "2", "345" ]
+  },
+  "param1" : "hello",
+  "param2" : 5,
+  "param4" : 38.8
+}, {
+  "innerData" : {
+    "innerParam1" : "second value inner class",
+    "innerParam2" : [ "100", "12", "-5" ]
+  },
+  "param1" : "world",
+  "param2" : -11,
+  "param4" : -0.021
+} ]

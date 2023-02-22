@@ -1,6 +1,5 @@
-package net.osandman.util.net.jackson_test;
+package net.osandman.util.parsing.jackson_example;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +8,7 @@ import java.util.List;
 
 @JsonAutoDetect
 public class SomeData {
-    @JsonProperty("new name")
+//    @JsonProperty("new name")
     private InnerData innerData;
     private String param1;
     private int param2;
