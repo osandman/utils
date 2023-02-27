@@ -1,4 +1,4 @@
-package net.osandman.util.parsing.jackson_example;
+package net.osandman.util.parsing.jackson_example1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;

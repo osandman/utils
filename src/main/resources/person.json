@@ -1,0 +1,17 @@
+{
+  "type" : "Human",
+  "name" : "Petr",
+  "assets" : [ {
+    "type" : "item",
+    "name" : "Car",
+    "price" : 125.0
+  }, {
+    "type" : "item",
+    "name" : "House",
+    "price" : 2340.0
+  } ],
+  "pet" : [ {
+    "type" : "my dog",
+    "name" : "Baron"
+  } ]
+}

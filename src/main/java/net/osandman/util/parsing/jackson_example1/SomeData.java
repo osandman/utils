@@ -1,8 +1,7 @@
-package net.osandman.util.parsing.jackson_example;
+package net.osandman.util.parsing.jackson_example1;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
