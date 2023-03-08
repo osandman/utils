@@ -11,7 +11,7 @@
     "price" : 2340.0
   } ],
   "pet" : [ {
-    "type" : "my dog",
+    "type" : "My doggy",
     "name" : "Baron"
   } ]
 }

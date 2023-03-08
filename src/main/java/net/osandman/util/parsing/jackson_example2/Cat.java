@@ -1,12 +1,8 @@
 package net.osandman.util.parsing.jackson_example2;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes(@JsonSubTypes.Type(value = Cat.class, name = "cat"))
-@JsonAutoDetect
+@JsonTypeName(value = "My kitty")
 public class Cat extends Pet {
     int age;
 
